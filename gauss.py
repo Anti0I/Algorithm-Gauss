@@ -22,7 +22,10 @@ def gauss_elimination(lista_rownan, wyniki):
             macierz_rozsz[j, i:] = macierz_rozsz[j, i:] - eliminowana_czesc
 
     x = np.zeros(liczba_rownan)
+    #ogolnie to to moze nie byc zrozumialem ale daje sie od liczby rownan -1 bo
+    # indeksy a potem z do -1 zeby raze wlacznie z 0 elementem to zrobic i -1 zeby od konca to robic ;)
     for i in range(liczba_rownan - 1, -1, -1):
+        #ostatni wynik od konca
         wynik = macierz_rozsz[i, -1]
         suma_znanych = np.dot(macierz_rozsz[i, i + 1:liczba_rownan], x[i + 1:])
         licznik = wynik - suma_znanych
@@ -30,3 +33,5 @@ def gauss_elimination(lista_rownan, wyniki):
         x[i] = licznik / mianownik
 
     return x
+#ogolnie to komentarz ode mnie algorytm sam w sobie prosty do zrobienia na kartce ale w pytohnie to to dosyc
+#straszne duzo tych macierzy i po prostu wchodzenia gleboko do nich leb czasami zarywa 
