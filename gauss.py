@@ -1,26 +1,32 @@
 import numpy as np
 
-def gauss_elimination(A, b):
+def gauss_elimination(lista_rownan, wyniki):
 
-    A = np.array(A, dtype=float)
-    b = np.array(b, dtype=float)
-    n = len(b)
+    lista_rownan = np.array(lista_rownan, dtype=float)
+    wyniki = np.array(wyniki, dtype=float)
+    liczba_rownan = len(wyniki)
 
-    Ab = np.hstack((A, b.reshape(-1, 1)))
+    macierz_rozsz = np.hstack((lista_rownan, wyniki.reshape(-1, 1)))
+    
+    for i in range(liczba_rownan):
+        max_row = i + np.argmax(np.abs(macierz_rozsz[i:, i]))
+        macierz_rozsz[[i, max_row]] = macierz_rozsz[[max_row, i]]
 
-    for i in range(n):
-        max_row = i + np.argmax(np.abs(Ab[i:, i]))
-        Ab[[i, max_row]] = Ab[[max_row, i]]
+        if np.abs(macierz_rozsz[i, i]) < 0.0000001:
+            print("Brak jednoznacznego rozwiązania")
+            return None
 
-        if np.abs(Ab[i, i]) < 0.0000001:
-            raise ValueError("Brak jednoznacznego rozwiązania")
+        for j in range(i + 1, liczba_rownan):
+            factor = macierz_rozsz[j, i] / macierz_rozsz[i, i]
+            eliminowana_czesc = factor * macierz_rozsz[i, i:]
+            macierz_rozsz[j, i:] = macierz_rozsz[j, i:] - eliminowana_czesc
 
-        for j in range(i + 1, n):
-            factor = Ab[j, i] / Ab[i, i]
-            Ab[j, i:] -= factor * Ab[i, i:]
-
-    x = np.zeros(n)
-    for i in range(n - 1, -1, -1):
-        x[i] = (Ab[i, -1] - np.dot(Ab[i, i + 1:n], x[i + 1:])) / Ab[i, i]
+    x = np.zeros(liczba_rownan)
+    for i in range(liczba_rownan - 1, -1, -1):
+        wynik = macierz_rozsz[i, -1]
+        suma_znanych = np.dot(macierz_rozsz[i, i + 1:liczba_rownan], x[i + 1:])
+        licznik = wynik - suma_znanych
+        mianownik = macierz_rozsz[i, i]
+        x[i] = licznik / mianownik
 
     return x
