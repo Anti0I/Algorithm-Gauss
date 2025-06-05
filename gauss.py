@@ -27,11 +27,12 @@ def gauss_elimination(lista_rownan, wyniki):
     for i in range(liczba_rownan - 1, -1, -1):
         #ostatni wynik od konca
         wynik = macierz_rozsz[i, -1]
+        #ta linijka sam nie zrobilem 
         suma_znanych = np.dot(macierz_rozsz[i, i + 1:liczba_rownan], x[i + 1:])
         licznik = wynik - suma_znanych
         mianownik = macierz_rozsz[i, i]
         x[i] = licznik / mianownik
 
     return x
-#ogolnie to komentarz ode mnie algorytm sam w sobie prosty do zrobienia na kartce ale w pytohnie to to dosyc
+#komentarz ode mnie algorytm sam w sobie prosty do zrobienia na kartce ale w pytohnie to to dosyc
 #straszne duzo tych macierzy i po prostu wchodzenia gleboko do nich leb czasami zarywa 
