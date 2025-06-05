@@ -1,8 +1,10 @@
 import numpy as np
-A = np.array([[1, 2],
-              [3, 4]])
-b = np.array([[5],
-              [6]])
 
-Ab = np.hstack((A, b))
-print(Ab)
+a = np.array([1, 2, 3, 4, 5, 6])
+print("Przed reshapem -> ",a)
+a = a.reshape(1,-1)
+print("Po reshape -> ",a)
+a1 = np.array([[1, 1, 1, 9, 9, 9]])              # (1,6)
+
+a2 = np.hstack((a, a1))
+print(a2)
