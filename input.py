@@ -1,11 +1,10 @@
 def get_user_input():
     n = int(input("Podaj liczbę równań: "))
 
-
     A = []
     b = []
 
-    print("Wpisz kolejne współczynniki i wyniki ich po spacji")
+    print("Wpisz dzialania z wynikami")
     for i in range(n):
         line = input(f"Równanie x{i + 1}: ").strip().split()
         row = list(map(float, line))
