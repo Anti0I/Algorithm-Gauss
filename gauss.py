@@ -13,7 +13,7 @@ def gauss(lista_rownan, wyniki):
         macierz_rozsz[[i, max_row]] = macierz_rozsz[[max_row, i]]
 
         if np.abs(macierz_rozsz[i, i]) < 0.00001:
-            print("Brak jednoznacznego rozwiazania")
+            raise ValueError("Brak jednoznacznego rozwiazania")
             return None
 
         for j in range(i + 1, liczba_rownan):
